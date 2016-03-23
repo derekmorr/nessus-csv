@@ -35,6 +35,9 @@ doc in Compile <<= target.map(_ / "none")
 // show test durations
 (testOptions in Test) += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
 
+// run tests in parallel
+parallelExecution in Test := true
+
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", xs @ _ *) =>
     (xs map { _.toLowerCase}) match {
