@@ -38,6 +38,8 @@ doc in Compile <<= target.map(_ / "none")
 // run tests in parallel
 parallelExecution in Test := true
 
+enablePlugins(GitBranchPrompt)
+
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", xs @ _ *) =>
     (xs map { _.toLowerCase}) match {
