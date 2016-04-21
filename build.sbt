@@ -38,7 +38,14 @@ doc in Compile <<= target.map(_ / "none")
 // run tests in parallel
 parallelExecution in Test := true
 
+// cache depedency resolution information
+updateOptions := updateOptions.value.withCachedResolution(true)
+
 enablePlugins(GitBranchPrompt)
+
+assemblyJarName in assembly := {
+  name.value + "-" + version.value + ".jar"
+}
 
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", xs @ _ *) =>
