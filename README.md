@@ -3,6 +3,12 @@ Skeleton for my Scala projects
 
 This is a skeleton I use for most of my Scala projects. It includes common libraries, SBT settings and plugins, etc. Feel free to use if you find it useful.
 
+After you checkout the project, edit `build.sbt` and set the `name` variable. Then run
+
+    git remote remove origin
+
+so you don't push project-specific changes back into the skeleton project.
+
 # Boilerplate README:
 
 # Prerequisites
