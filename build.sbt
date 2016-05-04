@@ -27,7 +27,9 @@ cancelable in Global := true
 mainClass in (Compile, packageBin) := Some("")
 
 // don't include scaladoc in distribution
-doc in Compile <<= target.map(_ / "none")
+//doc in Compile <<= target.map(_ / "none")
+
+autoAPIMappings := true
 
 // generate HTML reports for tests
 (testOptions in Test) += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/report")
@@ -38,7 +40,7 @@ doc in Compile <<= target.map(_ / "none")
 // run tests in parallel
 parallelExecution in Test := true
 
-// cache depedency resolution information
+// cache dependency resolution information
 updateOptions := updateOptions.value.withCachedResolution(true)
 
 enablePlugins(GitBranchPrompt)
