@@ -48,21 +48,19 @@ Run run a scapegoat report, run
 
 The HTML report will be written to `target/scala-2.11/scapegoat-report/scapegoat.html`
 
-# Running the app
+# Vulnerability checks
 
-Setup your AWS credentials, and run
+The project uses the [sbt-dependency-check](https://github.com/albuch/sbt-dependency-check) tool to query the
+[OWASP Dependency Check database](https://www.owasp.org/index.php/OWASP_Dependency_Check). You can check the project's
+depenencies for known security vulnerability by running
 
-    ./sbt run
+     ./sbt check
 
-# Packaging
+The HTML report will be written to `target/scala-2.11/dependency-check-report.html`
 
-To package for deployment to AWS, run
+Note - the first time you run this command it will take *much* longer than normal because it has to download the
+vulnerability database from OWASP.
 
-    ./sbt clean assembly
-
-This will build a "fat jar" file with all the dependencies bundled into a single file.
-
-The resulting JAR file will be written to `target/scala-2.11/<name>-<version>.jar`.
 
 # Manually installing dependencies
 
