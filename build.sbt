@@ -43,6 +43,8 @@ parallelExecution in Test := true
 // cache dependency resolution information
 updateOptions := updateOptions.value.withCachedResolution(true)
 
+shellPrompt in ThisBuild := { state => Project.extract(state).currentRef.project + "> " }
+
 enablePlugins(GitBranchPrompt)
 
 assemblyJarName in assembly := {
