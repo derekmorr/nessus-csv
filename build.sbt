@@ -2,17 +2,18 @@ name := "scala-skeleton"
 
 version := "1.0"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.1"
 
 lazy val root = (project in file("."))
 
 libraryDependencies ++= {
   Seq(
-    "org.scalaz"          %% "scalaz-core"    	% "7.2.6"   % Compile,
-    "org.scalacheck"      %% "scalacheck"     	% "1.13.2"  % Test,
-    "org.scalatest"       %% "scalatest"      	% "3.0.0"   % Test,
+    "com.github.melrief"  %% "purecsv"          % "0.0.9"   % Compile,
+    "org.scalaz"          %% "scalaz-core"    	% "7.2.9"   % Compile,
+    "org.scalacheck"      %% "scalacheck"     	% "1.13.4"  % Test,
+    "org.scalatest"       %% "scalatest"      	% "3.0.1"   % Test,
     "org.pegdown"         %  "pegdown"        	% "1.6.0"   % Test,
-    "org.typelevel"	  %% "scalaz-scalatest" % "1.0.0"   % Test
+    "org.typelevel"	      %% "scalaz-scalatest" % "1.1.2"   % Test
   )
 }
 
@@ -61,4 +62,4 @@ assemblyMergeStrategy in assembly := {
   case _ => MergeStrategy.first
 }
 
-scapegoatVersion := "1.2.1"
+scapegoatVersion := "1.3.0"
