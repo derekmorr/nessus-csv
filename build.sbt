@@ -1,10 +1,10 @@
-name := "scala-skeleton"
+name := "nessus-csv-loader"
 
 version := "1.0"
 
 scalaVersion := "2.12.1"
 
-lazy val root = (project in file("."))
+lazy val root = project in file(".")
 
 libraryDependencies ++= {
   Seq(
@@ -26,7 +26,7 @@ javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 // don't let Ctrl-C exit
 cancelable in Global := true
 
-mainClass in (Compile, packageBin) := Some("")
+mainClass in (Compile, packageBin) := Some("NessusLoader")
 
 // don't include scaladoc in distribution
 //doc in Compile <<= target.map(_ / "none")
@@ -55,7 +55,7 @@ assemblyJarName in assembly := {
 
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", xs @ _ *) =>
-    (xs map { _.toLowerCase}) match {
+    xs map { _.toLowerCase} match {
       case ("manifest.mf" :: Nil) | ("index.list" :: Nil) | ("dependencies" :: Nil) => MergeStrategy.discard
       case _ => MergeStrategy.discard
     }
