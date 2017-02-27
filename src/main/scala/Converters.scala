@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter
 
 import scala.util.{Failure, Success, Try}
 
+import com.google.common.net.{InetAddresses, InternetDomainName}
 import purecsv.safe.converter.StringConverter
 
 
@@ -13,8 +14,8 @@ import purecsv.safe.converter.StringConverter
 object Converters {
 
   implicit val inetAddressStringConverter = new StringConverter[InetAddress] {
-    override def tryFrom(str: String): Try[InetAddress] = Try(InetAddress.getByName(str))
-    override def to(inetAddress: InetAddress): String = inetAddress.getHostAddress
+    override def tryFrom(str: String): Try[InetAddress] = Try(InetAddresses.forString(str))
+    override def to(inetAddress: InetAddress): String = InetAddresses.toAddrString(inetAddress)
   }
 
   implicit val yesNoBooleanConverter = new StringConverter[Boolean] {
@@ -58,10 +59,15 @@ object Converters {
     }
   }
 
-
   implicit val urlListConverter = new StringConverter[List[URL]] {
     override def tryFrom(s: String): Try[List[URL]] = Try { s.lines.toList.map { new URL(_) } }
     override def to(urls: List[URL]): String = urls.map { _.toExternalForm }.mkString(System.lineSeparator())
+  }
+
+  implicit val internetDomainNameConverter = new StringConverter[InternetDomainName] {
+    override def tryFrom(str: String): Try[InternetDomainName] = Try { InternetDomainName.from(str) }
+
+    override def to(idn: InternetDomainName): String = idn.toString
   }
 
 }

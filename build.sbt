@@ -9,6 +9,7 @@ lazy val root = project in file(".")
 libraryDependencies ++= {
   Seq(
     "com.github.melrief"  %% "purecsv"          % "0.0.9"   % Compile,
+    "com.google.guava"    %  "guava"            % "21.0"    % Compile,
     "org.scalaz"          %% "scalaz-core"    	% "7.2.9"   % Compile,
     "org.scalacheck"      %% "scalacheck"     	% "1.13.4"  % Test,
     "org.scalatest"       %% "scalatest"      	% "3.0.1"   % Test,
