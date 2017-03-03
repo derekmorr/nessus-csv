@@ -24,8 +24,6 @@ To run unit tests, run
 
     ./sbt test
 
-This will not interact with AWS, so you don't need to setup AWS credentials to test the app.
-
 # Code coverage report
 
 To generate a code coverage report run,
