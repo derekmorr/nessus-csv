@@ -37,11 +37,6 @@ object Converters {
     override def to(p: PortNumber): String = p.portNumber.toString
   }
 
-  implicit val urlConverter = new StringConverter[URL] {
-    override def tryFrom(s: String): Try[URL] = Try { new URL(s) }
-    override def to(u: URL): String = u.toExternalForm
-  }
-
   implicit val nessusDateTimeConverter = new StringConverter[Option[LocalDateTime]] {
     private val nessusFormat = DateTimeFormatter.ofPattern("MMM d, uuuu HH:mm:ss zzz")
 
@@ -59,11 +54,4 @@ object Converters {
     override def tryFrom(s: String): Try[List[URL]] = Try { s.lines.toList.map { new URL(_) } }
     override def to(urls: List[URL]): String = urls.map { _.toExternalForm }.mkString(System.lineSeparator())
   }
-
-  implicit val internetDomainNameConverter = new StringConverter[InternetDomainName] {
-    override def tryFrom(str: String): Try[InternetDomainName] = Try { InternetDomainName.from(str) }
-
-    override def to(idn: InternetDomainName): String = idn.toString
-  }
-
 }
