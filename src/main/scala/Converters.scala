@@ -3,6 +3,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import scala.util.{Failure, Success, Try}
+import scalaz.std.string._
+import scalaz.syntax.equal._
 
 import com.google.common.net.{InetAddresses, InternetDomainName}
 import purecsv.safe.converter.StringConverter
@@ -40,23 +42,17 @@ object Converters {
     override def to(u: URL): String = u.toExternalForm
   }
 
-
   implicit val nessusDateTimeConverter = new StringConverter[Option[LocalDateTime]] {
-    private val format = DateTimeFormatter.ofPattern("MMM d, uuuu HH:mm:ss zzz")
+    private val nessusFormat = DateTimeFormatter.ofPattern("MMM d, uuuu HH:mm:ss zzz")
 
     override def tryFrom(s: String): Try[Option[LocalDateTime]] = {
-      if (s == "N/A")
+      if (s === "N/A")
         Success(None)
       else
-        Try { Option(LocalDateTime.parse(s, format)) }
+        Try { Option(LocalDateTime.parse(s, nessusFormat)) }
     }
 
-    override def to(dtOption: Option[LocalDateTime]): String = {
-      dtOption match {
-        case None => "N/A"
-        case Some(datetime) => datetime.format(format)
-      }
-    }
+    override def to(dtOption: Option[LocalDateTime]): String = dtOption.fold("N/A")(_.format(nessusFormat))
   }
 
   implicit val urlListConverter = new StringConverter[List[URL]] {
