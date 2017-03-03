@@ -1,15 +1,6 @@
-# scala-skeleton
-Skeleton for my Scala projects
+# Nessus CSV loader
 
-This is a skeleton I use for most of my Scala projects. It includes common libraries, SBT settings and plugins, etc. Feel free to use if you find it useful.
-
-After you checkout the project, edit `build.sbt` and set the `name` variable. Then run
-
-    git remote remove origin
-
-so you don't push project-specific changes back into the skeleton project.
-
-# Boilerplate README:
+ Sample loader for Nessus CSV export files, using the PureCSV library.
 
 # Prerequisites
 
@@ -18,10 +9,14 @@ You will need [Java 8 installed](http://java.oracle.com/). The app will download
 # Running the app:
 
 The app uses [sbt](http://www.scala-sbt.org/) to build and package the app.
-If you don't have sbt installed, you can use the bundled sbt runner (./sbt).
+If you don't have sbt installed, you can use the bundled sbt runner (`./sbt`).
 
 The first time you build the app, it will need to download dependencies and compile support code.
 This will take several minutes, but it only happens on the first build.
+
+To run the sample program:
+
+    ./sbt "run nessus_test.csv" 
 
 # Testing the app
 
@@ -60,7 +55,6 @@ The HTML report will be written to `target/scala-2.11/dependency-check-report.ht
 
 Note - the first time you run this command it will take *much* longer than normal because it has to download the
 vulnerability database from OWASP.
-
 
 # Manually installing dependencies
 
