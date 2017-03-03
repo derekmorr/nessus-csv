@@ -8,15 +8,15 @@ You will need [Java 8 installed](http://java.oracle.com/). The app will download
 
 # Running the app:
 
+To run the sample program:
+
+    ./sbt "run nessus_test.csv" 
+
 The app uses [sbt](http://www.scala-sbt.org/) to build and package the app.
 If you don't have sbt installed, you can use the bundled sbt runner (`./sbt`).
 
 The first time you build the app, it will need to download dependencies and compile support code.
 This will take several minutes, but it only happens on the first build.
-
-To run the sample program:
-
-    ./sbt "run nessus_test.csv" 
 
 # Testing the app
 
@@ -32,7 +32,7 @@ To generate a code coverage report run,
 
     ./sbt clean coverage test coverageReport
 
-The HTML report will be written to `target/scala-2.11/scoverage-report/index.html`.
+The HTML report will be written to `target/scala-2.12/scoverage-report/index.html`.
 
 # Code quality analysis
 
@@ -41,7 +41,7 @@ Run run a scapegoat report, run
 
     ./sbt scapegoat
 
-The HTML report will be written to `target/scala-2.11/scapegoat-report/scapegoat.html`
+The HTML report will be written to `target/scala-2.12/scapegoat-report/scapegoat.html`
 
 # Vulnerability checks
 
@@ -51,7 +51,7 @@ depenencies for known security vulnerability by running
 
      ./sbt check
 
-The HTML report will be written to `target/scala-2.11/dependency-check-report.html`
+The HTML report will be written to `target/scala-2.12/dependency-check-report.html`
 
 Note - the first time you run this command it will take *much* longer than normal because it has to download the
 vulnerability database from OWASP.
