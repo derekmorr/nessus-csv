@@ -14,13 +14,14 @@ case class Nessus(plugin: Int,
                   dnsName: String,
                   netBiosName: String,
                   pluginText: String,
+                  firstDiscovered: Option[LocalDateTime],
+                  lastObserved: Option[LocalDateTime],
+                  exploitFrameworks: String,
                   synopsis: String,
                   description: String,
                   solution: String,
                   seeAlso: List[URL],
                   cve: String,
-                  firstDiscovered: Option[LocalDateTime],
-                  lastObserved: Option[LocalDateTime],
                   vulnPubDate: Option[LocalDateTime],
-                  exploitEase: String,
-                  exploitFrameworks: String)
+                  exploitEase: String
+                  )
