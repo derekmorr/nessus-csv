@@ -1,6 +1,7 @@
 import scala.util.{Failure, Success}
 
 import Converters._
+import RefinedConverter._
 import com.zaxxer.hikari.{HikariDataSource, HikariConfig}
 import purecsv.safe.CSVReader
 import purecsv.safe.{intc, stringc}

@@ -30,11 +30,6 @@ object Converters {
     override def to(b: Boolean): String = if (b) "Yes" else "No"
   }
 
-  implicit val portNumberConverter = new StringConverter[PortNumber] {
-    override def tryFrom(s: String): Try[PortNumber] = Try { PortNumber(s.toInt) }
-    override def to(p: PortNumber): String = p.portNumber.toString
-  }
-
   implicit val nessusDateTimeConverter = new StringConverter[Option[LocalDateTime]] {
     private val format = DateTimeFormatter.ofPattern("MMM d, uuuu HH:mm:ss zzz")
 

@@ -8,11 +8,13 @@ lazy val root = project in file(".")
 
 libraryDependencies ++= {
   Seq(
+    "com.github.derekmorr"  %% "refined-anorm"        % "0.1"     % Compile,
     "com.github.melrief"    %% "purecsv"              % "0.0.9"   % Compile,
     "com.github.pureconfig" %% "pureconfig"           % "0.7.2"   % Compile,
     "com.google.guava"      %  "guava"                % "22.0"    % Compile,
     "com.typesafe.play"     %% "anorm"                % "2.5.3"   % Compile,
     "com.zaxxer"            %  "HikariCP"             % "2.6.2"   % Compile,
+    "eu.timepit"            %% "refined"              % "0.8.2"   % Compile,
     "org.scalaz"            %% "scalaz-core"    	    % "7.2.13"  % Compile,
 
     "org.scalacheck"        %% "scalacheck"     	    % "1.13.5"  % Test,

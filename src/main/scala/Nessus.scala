@@ -6,7 +6,9 @@ import scalaz.std.anyVal._
 import scalaz.syntax.equal._
 
 import anorm._
+import eu.timepit.refined.types.net.PortNumber
 import com.google.common.net.InetAddresses
+import refined.anorm._
 
 case class Nessus(plugin: Int,
                   pluginName: String,
@@ -44,7 +46,7 @@ object Nessus {
     SQL"""INSERT INTO nessus (plugin, pluginName, severity, IPAddress, port, protocol, family, exploit, DNSname,
           NetBIOSname, pluginText, synopsis, description, solution, seeAlso, cve, firstDiscovered,
           lastObserved, exploitEase, exploitFrameworks, repository, MACaddress, vulnPublicationDate, importedDate) VALUES
-          (${record.plugin}, ${record.pluginName}, ${record.severity}, $ip, ${record.port.portNumber}, ${record.protocol},
+          (${record.plugin}, ${record.pluginName}, ${record.severity}, $ip, ${record.port}, ${record.protocol},
            ${record.family}, ${record.exploit}, ${record.dnsName}, ${record.netBiosName}, $text,
            ${record.synopsis}, $description, $solution, $urls, ${record.cve}, ${record.firstDiscovered},
            ${record.lastObserved}, ${record.exploitEase}, ${record.exploitFrameworks}, ${record.repository},
