@@ -1,4 +1,4 @@
-import scala.language.{implicitConversions, postfixOps}
+import scala.language.postfixOps
 import scalaz.{Validation, ValidationNel}
 
 /**

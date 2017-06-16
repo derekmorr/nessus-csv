@@ -2,19 +2,25 @@ name := "nessus-csv-loader"
 
 version := "1.0"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.2"
 
 lazy val root = project in file(".")
 
 libraryDependencies ++= {
   Seq(
-    "com.github.melrief"  %% "purecsv"          % "0.0.9"   % Compile,
-    "com.google.guava"    %  "guava"            % "21.0"    % Compile,
-    "org.scalaz"          %% "scalaz-core"    	% "7.2.9"   % Compile,
-    "org.scalacheck"      %% "scalacheck"     	% "1.13.4"  % Test,
-    "org.scalatest"       %% "scalatest"      	% "3.0.1"   % Test,
-    "org.pegdown"         %  "pegdown"        	% "1.6.0"   % Test,
-    "org.typelevel"	      %% "scalaz-scalatest" % "1.1.2"   % Test
+    "com.github.melrief"    %% "purecsv"              % "0.0.9"   % Compile,
+    "com.github.pureconfig" %% "pureconfig"           % "0.7.2"   % Compile,
+    "com.google.guava"      %  "guava"                % "22.0"    % Compile,
+    "com.typesafe.play"     %% "anorm"                % "2.5.3"   % Compile,
+    "com.zaxxer"            %  "HikariCP"             % "2.6.2"   % Compile,
+    "org.scalaz"            %% "scalaz-core"    	    % "7.2.13"  % Compile,
+
+    "org.scalacheck"        %% "scalacheck"     	    % "1.13.5"  % Test,
+    "org.scalatest"         %% "scalatest"      	    % "3.0.3"   % Test,
+    "org.pegdown"           %  "pegdown"        	    % "1.6.0"   % Test,
+    "org.typelevel"	        %% "scalaz-scalatest"     % "1.1.2"   % Test,
+
+    "org.mariadb.jdbc"      %  "mariadb-java-client"  % "2.0.2"   % Runtime
   )
 }
 

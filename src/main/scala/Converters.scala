@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter
 
 import scala.util.{Failure, Success, Try}
 
-import com.google.common.net.{InetAddresses, InternetDomainName}
+import com.google.common.net.InetAddresses
 import purecsv.safe.converter.StringConverter
 
 
