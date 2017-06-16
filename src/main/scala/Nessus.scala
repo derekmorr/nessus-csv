@@ -5,10 +5,20 @@ import java.time.LocalDateTime
 import scalaz.std.anyVal._
 import scalaz.syntax.equal._
 
+import Types.{CVENumber, MacAddress}
 import anorm._
 import eu.timepit.refined.types.net.PortNumber
-import com.google.common.net.InetAddresses
+import com.google.common.net.{InetAddresses, InternetDomainName}
+import eu.timepit.refined.W
+import eu.timepit.refined.api.Refined
+import eu.timepit.refined.string.MatchesRegex
 import refined.anorm._
+
+object Types {
+  type MacAddress = String Refined MatchesRegex[W.`"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"`.T]
+  type CVENumber = String Refined MatchesRegex[W.`"^(CVE-[0-9]{4}-[0-9]*,??)*"`.T]
+
+}
 
 case class Nessus(plugin: Int,
                   pluginName: String,
@@ -19,8 +29,8 @@ case class Nessus(plugin: Int,
                   port: PortNumber,
                   exploit: Boolean,
                   repository: String,
-                  macAddress: String,
-                  dnsName: String,
+                  macAddress: Option[MacAddress],
+                  dnsName: Option[InternetDomainName],
                   netBiosName: String,
                   pluginText: String,
                   firstDiscovered: Option[LocalDateTime],
@@ -30,7 +40,7 @@ case class Nessus(plugin: Int,
                   description: String,
                   solution: String,
                   seeAlso: List[URL],
-                  cve: String,
+                  cve: Option[CVENumber],
                   vulnPubDate: Option[LocalDateTime],
                   exploitEase: String
                   )
@@ -47,7 +57,7 @@ object Nessus {
           NetBIOSname, pluginText, synopsis, description, solution, seeAlso, cve, firstDiscovered,
           lastObserved, exploitEase, exploitFrameworks, repository, MACaddress, vulnPublicationDate, importedDate) VALUES
           (${record.plugin}, ${record.pluginName}, ${record.severity}, $ip, ${record.port}, ${record.protocol},
-           ${record.family}, ${record.exploit}, ${record.dnsName}, ${record.netBiosName}, $text,
+           ${record.family}, ${record.exploit}, ${record.dnsName.toString}, ${record.netBiosName}, $text,
            ${record.synopsis}, $description, $solution, $urls, ${record.cve}, ${record.firstDiscovered},
            ${record.lastObserved}, ${record.exploitEase}, ${record.exploitFrameworks}, ${record.repository},
            ${record.macAddress}, ${record.vulnPubDate}, ${LocalDateTime.now()})"""

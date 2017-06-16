@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter
 
 import scala.util.{Failure, Success, Try}
 
-import com.google.common.net.InetAddresses
+import com.google.common.net.{InetAddresses, InternetDomainName}
 import purecsv.safe.converter.StringConverter
 
 
@@ -28,6 +28,12 @@ object Converters {
     }
 
     override def to(b: Boolean): String = if (b) "Yes" else "No"
+  }
+
+  implicit val internetDomainNameConverter = new StringConverter[InternetDomainName] {
+    override def tryFrom(str: String): Try[InternetDomainName] = Try { InternetDomainName.from(str) }
+
+    override def to(idn: InternetDomainName): String = idn.toString
   }
 
   implicit val nessusDateTimeConverter = new StringConverter[Option[LocalDateTime]] {
