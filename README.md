@@ -35,7 +35,7 @@ The HTML report will be written to `target/scala-2.12/scoverage-report/index.htm
 # Code quality analysis
 
 The project uses the [scapegoat tool](https://github.com/sksamuel/scapegoat) for code quality analysis.
-Run run a scapegoat report, run
+To generate a scapegoat report, run
 
     ./sbt scapegoat
 
