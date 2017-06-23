@@ -9,15 +9,16 @@ import edu.psu.vmhosting.models.Nessus
 
 class DBIntegrationTest extends DBTest {
 
+  implicit val arbPn = arbPortNumber
+
   val arbNessus: Arbitrary[Nessus] = implicitly[Arbitrary[Nessus]]
 
   "Nessus" must {
-    "round-trip records through the database" in {
+    "round-trip records through the database" in withConnection { implicit connection =>
       forAll { record: Nessus =>
-        withConnection { implicit connection =>
-          Nessus.insert(record) mustBe true
-          Nessus.forIp(record.ipAddress) must contain (record)
-        }
+        Nessus.insert(record) mustBe true
+        println(record.ipAddress)
+        Nessus.forIp(record.ipAddress) must contain (record)
       }
     }
   }

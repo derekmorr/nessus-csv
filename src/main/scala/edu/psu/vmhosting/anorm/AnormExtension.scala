@@ -45,12 +45,12 @@ trait URLListAnormSupport {
   def stringsToURL(s: String): List[URL] = {
     def stringToURL(st: String): Try[URL] = Try { new URL(st) }
 
-    val strings = s.split("\n")
+    val strings = s.split(System.lineSeparator())
     val tries = strings map { str => stringToURL(str) }
     tries.toList.collect { case Success(url) => url }
   }
 
-  implicit def rowToSeqURL: Column[List[URL]] = Column.nonNull { (value, meta) =>
+  implicit def rowToListURL: Column[List[URL]] = Column.nonNull { (value, meta) =>
     val MetaDataItem(qualified, _, _) = meta
     value match {
       case s: String => Right(stringsToURL(s))

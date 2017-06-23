@@ -1,6 +1,6 @@
 package edu.psu.vmhosting.models
 
-import java.net.{InetAddress, URL}
+import java.net.{Inet4Address, InetAddress, URL}
 import java.sql.Connection
 import java.time.LocalDateTime
 
@@ -16,13 +16,13 @@ import edu.psu.vmhosting.models.Types.{CVENumber, MacAddress}
 import eu.timepit.refined.W
 import eu.timepit.refined.api.Refined
 import eu.timepit.refined.string.MatchesRegex
-//import eu.timepit.refined.types.net.PortNumber
+import eu.timepit.refined.types.net.PortNumber
 import eu.timepit.refined.types.numeric.PosInt
 import refined.anorm._
 
 object Types {
   type MacAddress = String Refined MatchesRegex[W.`"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"`.T]
-  type CVENumber = String Refined MatchesRegex[W.`"^(CVE-[0-9]{4}-[0-9]*,??)*"`.T]
+  type CVENumber = String Refined MatchesRegex[W.`"^(CVE-[0-9]{4}-[0-9]*,?)*"`.T]
 }
 
 case class Nessus(plugin: Int,
@@ -31,7 +31,7 @@ case class Nessus(plugin: Int,
                   severity: String,
                   ipAddress: InetAddress,
                   protocol: String,
-//                  port: PortNumber,
+                  port: PortNumber,
                   exploit: Boolean,
                   repository: String,
                   macAddress: Option[MacAddress],
@@ -59,11 +59,11 @@ object Nessus {
     val text = record.pluginText.take(TEXT_LENGTH)
     val description = record.description.take(TEXT_LENGTH)
     val solution = record.solution.take(TEXT_LENGTH)
-//${record.port}, port,  between IpAddress and protocol
-    SQL"""INSERT INTO nessus (plugin, pluginName, severity, IPAddress,  protocol, family, exploit, DNSname,
+
+    SQL"""INSERT INTO nessus (plugin, pluginName, severity, IPAddress, port, protocol, family, exploit, DNSname,
           NetBIOSname, pluginText, synopsis, description, solution, seeAlso, cve, firstDiscovered,
           lastObserved, exploitEase, exploitFrameworks, repository, MACaddress, vulnPublicationDate, importedDate) VALUES
-          (${record.plugin}, ${record.pluginName}, ${record.severity}, ${record.ipAddress},  ${record.protocol},
+          (${record.plugin}, ${record.pluginName}, ${record.severity}, ${record.ipAddress}, ${record.port}, ${record.protocol},
            ${record.family}, ${record.exploit}, ${record.dnsName}, ${record.netBiosName}, $text,
            ${record.synopsis}, $description, $solution, $urls, ${record.cve}, ${record.firstDiscovered},
            ${record.lastObserved}, ${record.exploitEase}, ${record.exploitFrameworks}, ${record.repository},

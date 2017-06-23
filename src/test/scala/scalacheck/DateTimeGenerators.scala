@@ -1,6 +1,7 @@
 package scalacheck
 
 import java.time._
+import java.time.temporal.{ChronoUnit, TemporalUnit}
 
 import scala.collection.JavaConverters._
 
@@ -25,5 +26,6 @@ object DateTimeGenerators {
       .plusSeconds(seconds.toLong)
       .withEarlierOffsetAtOverlap()
       .toLocalDateTime
+      .truncatedTo(ChronoUnit.SECONDS)
 
 }

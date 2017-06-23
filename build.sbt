@@ -34,14 +34,12 @@ libraryDependencies ++= {
   )
 }
 
-scalacOptions ++= Seq(
-  "-feature", "-unchecked", "-deprecation", "-Xcheckinit", "-Xlint",
-  "-Xfatal-warnings", "-g:line", "-Ywarn-dead-code", "-Ywarn-numeric-widen")
+//scalacOptions ++= Seq(
+//  "-feature", "-unchecked", "-deprecation", "-Xcheckinit", "-Xlint",
+//  "-Xfatal-warnings", "-g:line", "-Ywarn-dead-code", "-Ywarn-numeric-widen")
 
 // make shapeless fast
 scalacOptions += "-Yinduction-heuristics"
-
-//scalacOptions += "-Xlog-implicits"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 

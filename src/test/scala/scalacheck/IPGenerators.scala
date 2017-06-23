@@ -21,6 +21,9 @@ object IPGenerators {
       .fromLittleEndianByteArray(byteList.toArray)
       .asInstanceOf[Inet6Address]
 
-  val genInetAddress: Gen[InetAddress] =
-    oneOf(genIPv4Address, genIPv6Address)
+//  val genInetAddress: Gen[InetAddress] =
+//    oneOf(genIPv4Address, genIPv6Address)
+
+  // schema only supports IPv4 atm.
+  val genInetAddress: Gen[InetAddress] = genIPv4Address
 }

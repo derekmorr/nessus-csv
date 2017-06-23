@@ -11,6 +11,8 @@ import URLGenerator.genURL
 
 import com.google.common.net.InternetDomainName
 import edu.psu.vmhosting.models.Types.{CVENumber, MacAddress}
+import eu.timepit.refined.types.net.PortNumber
+import eu.timepit.refined.scalacheck.numeric._
 import org.scalacheck.Arbitrary
 
 object Arbitraries {
@@ -31,4 +33,8 @@ object Arbitraries {
 
   implicit lazy val arbMacAddress: Arbitrary[MacAddress] =
     Arbitrary(genMacAddress)
+
+  lazy val arbPortNumber: Arbitrary[PortNumber] =
+    implicitly[Arbitrary[PortNumber]]
+
 }
