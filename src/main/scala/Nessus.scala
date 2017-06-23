@@ -42,7 +42,7 @@ case class Nessus(plugin: Int,
                   solution: String,
                   seeAlso: List[URL],
                   cve: Option[CVENumber],
-                  vulnPubDate: Option[LocalDateTime],
+                  vulnPublicationDate: Option[LocalDateTime],
                   exploitEase: String
                   )
 
@@ -64,7 +64,7 @@ object Nessus {
            ${record.family}, ${record.exploit}, ${record.dnsName}, ${record.netBiosName}, $text,
            ${record.synopsis}, $description, $solution, $urls, ${record.cve}, ${record.firstDiscovered},
            ${record.lastObserved}, ${record.exploitEase}, ${record.exploitFrameworks}, ${record.repository},
-           ${record.macAddress}, ${record.vulnPubDate}, ${LocalDateTime.now()})"""
+           ${record.macAddress}, ${record.vulnPublicationDate}, ${LocalDateTime.now()})"""
       .executeUpdate() === 1
   }
 

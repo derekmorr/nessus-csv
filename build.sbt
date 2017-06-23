@@ -16,13 +16,14 @@ libraryDependencies ++= {
     "com.typesafe.play"     %% "anorm"                % "2.5.3"   % Compile,
     "com.zaxxer"            %  "HikariCP"             % "2.6.2"   % Compile,
     "eu.timepit"            %% "refined"              % "0.8.2"   % Compile,
-
+    "io.circe"              %% "circe-core"           % circe     % Compile,
+    "io.circe"              %% "circe-generic"        % circe     % Compile,
+    "io.circe"              %% "circe-parser"         % circe     % Compile,
     "org.typelevel"         %% "cats-core"            % "0.9.0"   % Compile,
 
     "org.scalacheck"        %% "scalacheck"     	    % "1.13.5"  % Test,
     "org.scalatest"         %% "scalatest"      	    % "3.0.3"   % Test,
     "org.pegdown"           %  "pegdown"        	    % "1.6.0"   % Test,
-//    "org.typelevel"	        %% "scalaz-scalatest"     % "1.1.2"   % Test,
 
     "org.mariadb.jdbc"      %  "mariadb-java-client"  % "2.0.2"   % Runtime
   )

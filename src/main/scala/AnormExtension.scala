@@ -1,6 +1,8 @@
 import java.net.{InetAddress, URL}
 
-import anorm.{Column, ParameterMetaData, ToStatement}
+import scala.util.{Success, Try}
+
+import anorm.{Column, MetaDataItem, ParameterMetaData, ToStatement}
 import AnormSupport._
 import com.google.common.net.{InetAddresses, InternetDomainName}
 
@@ -38,7 +40,28 @@ trait URLAnormSupport {
     columnFromString[URL](new URL(_))
 }
 
-object AnormExtension extends InetAddressAnormSupport
+trait URLListAnormSupport {
+  def stringsToURL(s: String): List[URL] = {
+    def stringToURL(st: String): Try[URL] = Try { new URL(st) }
+
+    val strings = s.split("\n")
+    val tries = strings map { str => stringToURL(str) }
+    tries.toList.collect { case Success(url) => url }
+  }
+
+  implicit def rowToSeqURL: Column[List[URL]] = Column.nonNull { (value, meta) =>
+    val MetaDataItem(qualified, _, _) = meta
+    value match {
+      case s: String => Right(stringsToURL(s))
+      case _ => buildError(value, "List[URL]", qualified)
+
+    }
+  }
+}
+
+object AnormExtension
+  extends InetAddressAnormSupport
   with InternetDomainNameAnormSupport
   with URLAnormSupport
+  with URLListAnormSupport
 

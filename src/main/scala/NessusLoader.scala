@@ -3,6 +3,7 @@ import scala.util.{Failure, Success}
 import Converters._
 import RefinedConverter._
 import com.zaxxer.hikari.{HikariDataSource, HikariConfig}
+import eu.timepit.refined.auto._
 import purecsv.safe.CSVReader
 import pureconfig.loadConfigOrThrow
 
@@ -25,6 +26,8 @@ object NessusLoader {
     implicit val connection = dataSource.getConnection()
 
     records.foreach { record => Nessus.insert(record) }
+
+    Nessus.take(5).foreach(println)
 
     connection.close()
   }
