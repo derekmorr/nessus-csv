@@ -2,34 +2,31 @@ import scala.util.{Failure, Success}
 
 import Converters._
 import RefinedConverter._
+import circe.CirceEncoders._
 import com.zaxxer.hikari.{HikariDataSource, HikariConfig}
 import eu.timepit.refined.auto._
+import io.circe.generic.auto._
+import io.circe.java8.time._
+import io.circe.refined._
+import io.circe.syntax._
 import purecsv.safe.CSVReader
 import pureconfig.loadConfigOrThrow
 
 object NessusLoader {
 
   def main(args: Array[String]): Unit = {
-    val reader = CSVReader[Nessus]
-    val allRecords = reader.readCSVFromFileName(args(0), skipHeader=true)
-
-    val records = allRecords.collect { case Success(s) => s}
-    println(s"records: ${records.length}")
-
-    val failures = allRecords.collect { case Failure(e) => e }
-    println(s"failures: ${failures.length}")
-
-    failures.map { _.getLocalizedMessage }.distinct.foreach(println)
+    val records = parseRecords(args(0))
 
     val dbConfig = loadConfigOrThrow[DBConfig]("db.default")
     val dataSource = getDataSource(dbConfig)
     implicit val connection = dataSource.getConnection()
 
     records.foreach { record => Nessus.insert(record) }
-
-    Nessus.take(5).foreach(println)
-
+    val smallRecords = Nessus.take(5)
     connection.close()
+
+    smallRecords.foreach { r => println(r.asJson.spaces2) }
+
   }
 
   def getDataSource(dbConfig: DBConfig): HikariDataSource = {
@@ -45,4 +42,18 @@ object NessusLoader {
     new HikariDataSource(hikariConfig)
   }
 
+  def parseRecords(filename: String): List[Nessus] = {
+    val reader = CSVReader[Nessus]
+    val allRecords = reader.readCSVFromFileName(filename, skipHeader=true)
+
+    val records = allRecords.collect { case Success(s) => s}
+    println(s"records: ${records.length}")
+
+    val failures = allRecords.collect { case Failure(e) => e }
+    println(s"failures: ${failures.length}")
+
+    failures.map { _.getLocalizedMessage }.distinct.foreach(println)
+
+    records
+  }
 }

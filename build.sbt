@@ -18,7 +18,8 @@ libraryDependencies ++= {
     "eu.timepit"            %% "refined"              % "0.8.2"   % Compile,
     "io.circe"              %% "circe-core"           % circe     % Compile,
     "io.circe"              %% "circe-generic"        % circe     % Compile,
-    "io.circe"              %% "circe-parser"         % circe     % Compile,
+    "io.circe"              %% "circe-java8"          % circe     % Compile,
+    "io.circe"              %% "circe-refined"        % circe     % Compile,
     "org.typelevel"         %% "cats-core"            % "0.9.0"   % Compile,
 
     "org.scalacheck"        %% "scalacheck"     	    % "1.13.5"  % Test,
