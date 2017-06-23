@@ -46,12 +46,14 @@ case class Nessus(plugin: Int,
                   )
 
 object Nessus {
+  private val TEXT_LENGTH = 65535
+
   def insert(record: Nessus)(implicit connection: Connection): Boolean = {
     val urls = record.seeAlso.map(_.toExternalForm).mkString(System.lineSeparator())
     val ip = InetAddresses.toAddrString(record.ipAddress)
-    val text = record.pluginText.take(65535)
-    val description = record.description.take(65535)
-    val solution = record.solution.take(65535)
+    val text = record.pluginText.take(TEXT_LENGTH)
+    val description = record.description.take(TEXT_LENGTH)
+    val solution = record.solution.take(TEXT_LENGTH)
 
     SQL"""INSERT INTO nessus (plugin, pluginName, severity, IPAddress, port, protocol, family, exploit, DNSname,
           NetBIOSname, pluginText, synopsis, description, solution, seeAlso, cve, firstDiscovered,

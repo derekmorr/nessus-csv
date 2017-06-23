@@ -28,7 +28,6 @@ object NessusLoader {
     records.foreach { record => Nessus.insert(record) }
 
     connection.close()
-
   }
 
   def getDataSource(dbConfig: DBConfig): HikariDataSource = {
