@@ -36,16 +36,6 @@ class ConvertersTest extends BaseTest {
       }
     }
 
-    "support TCP/UDP port numbers" which {
-      "parse numbers in range as a PortNumber" in {
-        portNumberConverter.tryFrom("80").success.value mustBe PortNumber.build(80).toOption.get
-      }
-
-      "reject port numbers outside of the valid range" in {
-        portNumberConverter.tryFrom("-1") mustBe 'failure
-      }
-    }
-
     "support nesuss-formatted datetime stamps" which {
       "parse 'N/A' as None" in {
         nessusDateTimeConverter.tryFrom("N/A").success.value mustBe None

@@ -1,6 +1,7 @@
 import purecsv.safe.CSVReader
 
 import Converters._
+import RefinedConverter._
 
 /**
   * Integration-style test that parses CSV data from a file

@@ -1,6 +1,40 @@
-"Plugin","Plugin Name","Family","Severity","IP Address","Protocol","Port","Exploit?","Repository","MAC Address","DNS Name","NetBIOS Name","Plugin Text","Synopsis","Description","Solution","See Also","CVE","First Discovered","Last Observed","Vuln Publication Date","Exploit Ease","Exploit Frameworks"
-"91572","OpenSSL AES-NI Padding Oracle MitM Information Disclosure","General","Low","128.118.3.111","TCP","443","No","OIS_AISGI","","webconference.vmhost.psu.edu","","Plugin Output: Nessus was able to trigger a RECORD_OVERFLOW alert in the
-remote service by sending a crafted SSL """"Finished"""" message.","It was possible to obtain sensitive information from the remote host with TLS-enabled services.","The remote host is affected by a man-in-the-middle (MitM) information disclosure vulnerability due to an error in the implementation of ciphersuites that use AES in CBC mode with HMAC-SHA1 or HMAC-SHA256.
-The implementation is specially written to use the AES acceleration available in x86/amd64 processors (AES-NI). The error messages returned by the server allow allow a man-in-the-middle attacker to conduct a padding oracle attack, resulting in the ability to decrypt network traffic.","Upgrade to OpenSSL version 1.0.1t / 1.0.2h or later.","https://blog.filippo.io/luckyminus20/
-http://www.nessus.org/u?37b909b6
-https://www.openssl.org/news/secadv/20160503.txt","CVE-2016-2107","Jun 20, 2016 09:09:53 EDT","Jan 16, 2017 09:10:01 EST","May 3, 2016 12:00:00 EDT","",""
+"Plugin","Plugin Name","Family","Severity","IP Address","Protocol","Port","Exploit?","Repository","MAC Address","DNS Name","NetBIOS Name","Plugin Text","First Discovered","Last Observed","Exploit Frameworks","Synopsis","Description","Solution","See Also","CVE","Vuln Publication Date","Exploit Ease"
+"10180","Ping the remote host","Port scanners","Info","128.118.3.0","TCP","0","No","Individual Scan","","","","Plugin Output: The remote host (128.118.3.0) is considered as dead - not scanning
+The remote host (128.118.3.0) did not respond to the following ping methods :
+- TCP ping
+- ICMP ping","Jan 20, 2016 05:38:52 EST","Jun 13, 2017 20:16:39 EDT","","It was possible to identify the status of the remote host (alive or dead)","This plugin attempts to determine if the remote host is alive using one or more ping types :
+
+  - An ARP ping, provided the host is on the local subnet     and Nessus is running over ethernet.
+
+  - An ICMP ping.
+
+  - A TCP ping, in which the plugin sends to the remote host     a packet with the flag SYN, and the host will reply with     a RST or a SYN/ACK. 
+
+  - A UDP ping (DNS, RPC, NTP, etc).","n/a","","","N/A",""
+"10114","ICMP Timestamp Request Remote Date Disclosure","General","Info","128.118.3.1","ICMP","0","No","Individual Scan","","","","Plugin Output: The remote clock is synchronized with the local clock.","Jan 4, 2017 05:19:20 EST","Jun 13, 2017 20:16:39 EDT","","It is possible to determine the exact time set on the remote host.","The remote host answers to an ICMP timestamp request.  This allows an attacker to know the date that is set on the targeted machine, which may assist an unauthenticated, remote attacker in defeating time-based authentication protocols.
+
+Timestamps returned from machines running Windows Vista / 7 / 2008 / 2008 R2 are deliberately incorrect, but usually within 1000 seconds of the actual system time.","Filter out the ICMP timestamp requests (13), and the outgoing ICMP timestamp replies (14).","","CVE-1999-0524","Jan 1, 1995 12:00:00 EST",""
+"10287","Traceroute Information","General","Info","128.118.3.1","UDP","0","No","Individual Scan","","","","Plugin Output: For your information, here is the traceroute from 172.31.185.234 to 128.118.3.1 : 
+172.31.185.234
+172.31.185.225
+128.118.3.1","Jan 20, 2016 05:38:52 EST","Jun 13, 2017 20:16:39 EDT","","It was possible to obtain traceroute information.","Makes a traceroute to the remote host.","n/a","","","N/A",""
+"10386","Web Server No 404 Error Code Check","Web Servers","Info","128.118.3.1","TCP","900","No","Individual Scan","","","","Plugin Output: The following title tag will be used :
+Client Authentication","Mar 24, 2017 05:33:38 EDT","Jun 13, 2017 20:16:39 EDT","","The remote web server does not return 404 error codes.","The remote web server is configured such that it does not return '404 Not Found' error codes when a nonexistent file is requested, perhaps returning instead a site map, search page or authentication page.
+
+Nessus has enabled some counter measures for this.  However, they might be insufficient.  If a great number of security holes are produced for this port, they might not all be accurate.","n/a","","","N/A",""
+"10675","Check Point FireWall-1 Telnet Client Authentication Detection","Firewalls","Info","128.118.3.1","TCP","259","No","Individual Scan","","","","Plugin Output: 
+The banner of the remote service is :
+
+Check Point FireWall-1 Client Authentication Server running on Shields-FW07","Jan 4, 2017 05:19:20 EST","Jun 13, 2017 20:16:39 EDT","","A Check Point FireWall-1 Client Authentication server is listening on this port.","The Check Point FireWall-1 Client Authentication server is used to authenticate a user via telnet.  Once authenticated, the user can get more privileges on the network (ie, get access to hosts that were previously blocked by the firewall).","If you do not use this feature, disable it.","","","N/A",""
+"11219","Nessus SYN scanner","Port scanners","Info","128.118.3.1","TCP","259","No","Individual Scan","","","","Plugin Output: Port 259/tcp was found to be open","Sep 21, 2016 04:41:51 EDT","Jun 13, 2017 20:16:39 EDT","","It is possible to determine which TCP ports are open.","This plugin is a SYN 'half-open' port scanner.  It shall be reasonably quick even against a firewalled target. 
+
+Note that SYN scans are less intrusive than TCP (full connect) scans against broken services, but they might cause problems for less robust firewalls and also leave unclosed connections on the remote target, if the network is loaded.","Protect your target with an IP filter.","","","N/A",""
+"11219","Nessus SYN scanner","Port scanners","Info","128.118.3.1","TCP","900","No","Individual Scan","","","","Plugin Output: Port 900/tcp was found to be open","Oct 12, 2016 05:00:42 EDT","Jun 13, 2017 20:16:39 EDT","","It is possible to determine which TCP ports are open.","This plugin is a SYN 'half-open' port scanner.  It shall be reasonably quick even against a firewalled target. 
+
+Note that SYN scans are less intrusive than TCP (full connect) scans against broken services, but they might cause problems for less robust firewalls and also leave unclosed connections on the remote target, if the network is loaded.","Protect your target with an IP filter.","","","N/A",""
+"11219","Nessus SYN scanner","Port scanners","Info","128.118.3.1","TCP","12873","No","Individual Scan","","","","Plugin Output: Port 12873/tcp was found to be open","Sep 21, 2016 04:41:51 EDT","Jun 13, 2017 20:16:39 EDT","","It is possible to determine which TCP ports are open.","This plugin is a SYN 'half-open' port scanner.  It shall be reasonably quick even against a firewalled target. 
+
+Note that SYN scans are less intrusive than TCP (full connect) scans against broken services, but they might cause problems for less robust firewalls and also leave unclosed connections on the remote target, if the network is loaded.","Protect your target with an IP filter.","","","N/A",""
+"11219","Nessus SYN scanner","Port scanners","Info","128.118.3.1","TCP","18184","No","Individual Scan","","","","Plugin Output: Port 18184/tcp was found to be open","Sep 21, 2016 04:41:51 EDT","Jun 13, 2017 20:16:39 EDT","","It is possible to determine which TCP ports are open.","This plugin is a SYN 'half-open' port scanner.  It shall be reasonably quick even against a firewalled target. 
+
+Note that SYN scans are less intrusive than TCP (full connect) scans against broken services, but they might cause problems for less robust firewalls and also leave unclosed connections on the remote target, if the network is loaded.","Protect your target with an IP filter.","","","N/A",""
