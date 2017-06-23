@@ -9,5 +9,5 @@ addSbtPlugin("com.typesafe.sbt"       %   "sbt-git"               % "0.8.5")
 addSbtPlugin("net.vonbuchholtz"       %   "sbt-dependency-check"  % "0.1.0")
 addSbtPlugin("com.orrsella"           %   "sbt-stats"             % "1.0.5")
 addSbtPlugin("com.scalapenos"         %   "sbt-prompt"            % "1.0.0")
-addSbtPlugin("io.get-coursier"        %   "sbt-coursier"          % "1.0.0-M15")
+addSbtPlugin("io.get-coursier"        %   "sbt-coursier"          % "1.0.0-RC5")
 

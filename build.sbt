@@ -2,7 +2,8 @@ name := "nessus-csv-loader"
 
 version := "1.0"
 
-scalaVersion := "2.12.2"
+scalaOrganization := "org.typelevel"
+scalaVersion := "2.12.2-bin-typelevel-4"
 
 lazy val root = project in file(".")
 
@@ -14,7 +15,7 @@ libraryDependencies ++= {
     "com.github.pureconfig" %% "pureconfig"           % "0.7.2"   % Compile,
     "com.google.guava"      %  "guava"                % "22.0"    % Compile,
     "com.typesafe.play"     %% "anorm"                % "2.5.3"   % Compile,
-    "com.zaxxer"            %  "HikariCP"             % "2.6.2"   % Compile,
+    "com.zaxxer"            %  "HikariCP"             % "2.6.3"   % Compile,
     "eu.timepit"            %% "refined"              % "0.8.2"   % Compile,
     "io.circe"              %% "circe-core"           % circe     % Compile,
     "io.circe"              %% "circe-generic"        % circe     % Compile,
@@ -33,6 +34,9 @@ libraryDependencies ++= {
 scalacOptions ++= Seq(
   "-feature", "-unchecked", "-deprecation", "-Xcheckinit", "-Xlint",
   "-Xfatal-warnings", "-g:line", "-Ywarn-dead-code", "-Ywarn-numeric-widen")
+
+// make shapeless fast
+scalacOptions += "-Yinduction-heuristics"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 
@@ -75,4 +79,4 @@ assemblyMergeStrategy in assembly := {
   case _ => MergeStrategy.first
 }
 
-scapegoatVersion := "1.3.0"
+scapegoatVersion := "1.3.1"
