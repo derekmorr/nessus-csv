@@ -1,14 +1,15 @@
+package edu.psu.vmhosting
+
 import java.net.{InetAddress, URL}
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import scala.util.{Failure, Success, Try}
 
-import cats.syntax.eq._
 import cats.instances.all._
+import cats.syntax.eq._
 import com.google.common.net.{InetAddresses, InternetDomainName}
-import purecsv.safe.converter.StringConverter
-
+import _root_.purecsv.safe.converter.StringConverter
 
 /**
   * Custom [[StringConverter]] instances

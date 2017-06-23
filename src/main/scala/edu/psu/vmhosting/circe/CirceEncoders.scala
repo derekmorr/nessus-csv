@@ -1,4 +1,4 @@
-package circe
+package edu.psu.vmhosting.circe
 
 import java.net.{InetAddress, URL}
 

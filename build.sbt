@@ -8,26 +8,29 @@ scalaVersion := "2.12.2-bin-typelevel-4"
 lazy val root = project in file(".")
 
 libraryDependencies ++= {
-  lazy val circe = "0.8.0"
+  val circe = "0.8.0"
+  val refined = "0.8.2"
   Seq(
-    "com.github.derekmorr"  %% "refined-anorm"        % "0.1"     % Compile,
-    "com.github.melrief"    %% "purecsv"              % "0.0.9"   % Compile,
-    "com.github.pureconfig" %% "pureconfig"           % "0.7.2"   % Compile,
-    "com.google.guava"      %  "guava"                % "22.0"    % Compile,
-    "com.typesafe.play"     %% "anorm"                % "2.5.3"   % Compile,
-    "com.zaxxer"            %  "HikariCP"             % "2.6.3"   % Compile,
-    "eu.timepit"            %% "refined"              % "0.8.2"   % Compile,
-    "io.circe"              %% "circe-core"           % circe     % Compile,
-    "io.circe"              %% "circe-generic"        % circe     % Compile,
-    "io.circe"              %% "circe-java8"          % circe     % Compile,
-    "io.circe"              %% "circe-refined"        % circe     % Compile,
-    "org.typelevel"         %% "cats-core"            % "0.9.0"   % Compile,
+    "com.github.derekmorr"        %% "refined-anorm"              % "0.1"     % Compile,
+    "com.github.melrief"          %% "purecsv"                    % "0.0.9"   % Compile,
+    "com.github.pureconfig"       %% "pureconfig"                 % "0.7.2"   % Compile,
+    "com.google.guava"            %  "guava"                      % "22.0"    % Compile,
+    "com.typesafe.play"           %% "anorm"                      % "2.5.3"   % Compile,
+    "com.zaxxer"                  %  "HikariCP"                   % "2.6.3"   % Compile,
+    "eu.timepit"                  %% "refined"                    % refined   % Compile,
+    "io.circe"                    %% "circe-core"                 % circe     % Compile,
+    "io.circe"                    %% "circe-generic"              % circe     % Compile,
+    "io.circe"                    %% "circe-java8"                % circe     % Compile,
+    "io.circe"                    %% "circe-refined"              % circe     % Compile,
+    "org.typelevel"               %% "cats-core"                  % "0.9.0"   % Compile,
 
-    "org.scalacheck"        %% "scalacheck"     	    % "1.13.5"  % Test,
-    "org.scalatest"         %% "scalatest"      	    % "3.0.3"   % Test,
-    "org.pegdown"           %  "pegdown"        	    % "1.6.0"   % Test,
+    "com.github.alexarchambault"  %% "scalacheck-shapeless_1.13"  % "1.1.5"   % Test,
+    "eu.timepit"                  %% "refined-scalacheck"         % refined   % Test,
+    "org.scalacheck"              %% "scalacheck"     	          % "1.13.5"  % Test,
+    "org.scalatest"               %% "scalatest"      	          % "3.0.3"   % Test,
+    "org.pegdown"                 %  "pegdown"        	          % "1.6.0"   % Test,
 
-    "org.mariadb.jdbc"      %  "mariadb-java-client"  % "2.0.2"   % Runtime
+    "org.mariadb.jdbc"            %  "mariadb-java-client"        % "2.0.2"   % Runtime
   )
 }
 
@@ -37,6 +40,8 @@ scalacOptions ++= Seq(
 
 // make shapeless fast
 scalacOptions += "-Yinduction-heuristics"
+
+//scalacOptions += "-Xlog-implicits"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 

@@ -1,11 +1,12 @@
+package edu.psu.vmhosting.anorm
+
 import java.net.{InetAddress, URL}
 
 import scala.util.{Success, Try}
 
+import AnormSupport.{buildError, columnFromString, metadataString, toStatementString}
 import anorm.{Column, MetaDataItem, ParameterMetaData, ToStatement}
-import AnormSupport._
 import com.google.common.net.{InetAddresses, InternetDomainName}
-
 
 trait InetAddressAnormSupport {
   implicit val inetAddressMetadata: ParameterMetaData[InetAddress] =
@@ -54,14 +55,13 @@ trait URLListAnormSupport {
     value match {
       case s: String => Right(stringsToURL(s))
       case _ => buildError(value, "List[URL]", qualified)
-
     }
   }
 }
+
 
 object AnormExtension
   extends InetAddressAnormSupport
   with InternetDomainNameAnormSupport
   with URLAnormSupport
   with URLListAnormSupport
-

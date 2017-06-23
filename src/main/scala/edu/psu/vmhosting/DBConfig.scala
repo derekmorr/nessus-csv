@@ -1,3 +1,5 @@
+package edu.psu.vmhosting
+
 case class DBConfig(url: String,
                     driver: String,
                     username: String,

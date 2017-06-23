@@ -1,3 +1,5 @@
+package edu.psu.vmhosting.purecsv
+
 import scala.language.higherKinds
 import scala.util.{Failure, Success, Try}
 

@@ -1,9 +1,9 @@
 import java.net.InetAddress
 
-import Converters._
+import edu.psu.vmhosting.Converters._
 
 /**
-  * Unit tests for [[Converters]]
+  * Unit tests for [[edu.psu.vmhosting.Converters]]
   */
 class ConvertersTest extends BaseTest {
 

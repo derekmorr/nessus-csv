@@ -1,7 +1,11 @@
+import edu.psu.vmhosting.models.Nessus
 import purecsv.safe.CSVReader
-
-import Converters._
-import RefinedConverter._
+import edu.psu.vmhosting.purecsv.RefinedConverter._
+import edu.psu.vmhosting.Converters._
+import edu.psu.vmhosting.purecsv.RefinedConverter._
+import edu.psu.vmhosting.models.Nessus
+import eu.timepit.refined.auto._
+import purecsv.safe.CSVReader
 
 /**
   * Integration-style test that parses CSV data from a file

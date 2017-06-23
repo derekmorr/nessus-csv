@@ -1,9 +1,12 @@
+package edu.psu.vmhosting.anorm
+
 import java.sql.PreparedStatement
 
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try}
 
 import anorm.{Column, ColumnName, MetaDataItem, ParameterMetaData, ToStatement, TypeDoesNotMatch}
+
 
 object AnormSupport {
 
