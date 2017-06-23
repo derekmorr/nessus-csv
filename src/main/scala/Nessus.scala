@@ -2,12 +2,11 @@ import java.net.{InetAddress, URL}
 import java.sql.Connection
 import java.time.LocalDateTime
 
-import scalaz.std.anyVal._
-import scalaz.syntax.equal._
-
 import Types.{CVENumber, MacAddress}
 import anorm._
 import eu.timepit.refined.types.net.PortNumber
+import cats.syntax.eq._
+import cats.instances.all._
 import com.google.common.net.{InetAddresses, InternetDomainName}
 import eu.timepit.refined.W
 import eu.timepit.refined.api.Refined

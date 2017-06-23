@@ -3,9 +3,9 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import scala.util.{Failure, Success, Try}
-import scalaz.std.string._
-import scalaz.syntax.equal._
 
+import cats.syntax.eq._
+import cats.instances.all._
 import com.google.common.net.{InetAddresses, InternetDomainName}
 import purecsv.safe.converter.StringConverter
 

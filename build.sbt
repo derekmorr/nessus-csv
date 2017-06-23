@@ -7,6 +7,7 @@ scalaVersion := "2.12.2"
 lazy val root = project in file(".")
 
 libraryDependencies ++= {
+  lazy val circe = "0.8.0"
   Seq(
     "com.github.derekmorr"  %% "refined-anorm"        % "0.1"     % Compile,
     "com.github.melrief"    %% "purecsv"              % "0.0.9"   % Compile,
@@ -15,12 +16,13 @@ libraryDependencies ++= {
     "com.typesafe.play"     %% "anorm"                % "2.5.3"   % Compile,
     "com.zaxxer"            %  "HikariCP"             % "2.6.2"   % Compile,
     "eu.timepit"            %% "refined"              % "0.8.2"   % Compile,
-    "org.scalaz"            %% "scalaz-core"    	    % "7.2.13"  % Compile,
+
+    "org.typelevel"         %% "cats-core"            % "0.9.0"   % Compile,
 
     "org.scalacheck"        %% "scalacheck"     	    % "1.13.5"  % Test,
     "org.scalatest"         %% "scalatest"      	    % "3.0.3"   % Test,
     "org.pegdown"           %  "pegdown"        	    % "1.6.0"   % Test,
-    "org.typelevel"	        %% "scalaz-scalatest"     % "1.1.2"   % Test,
+//    "org.typelevel"	        %% "scalaz-scalatest"     % "1.1.2"   % Test,
 
     "org.mariadb.jdbc"      %  "mariadb-java-client"  % "2.0.2"   % Runtime
   )
