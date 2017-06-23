@@ -54,7 +54,7 @@ object Nessus {
 
   val parser: RowParser[Nessus] = Macro.namedParser[Nessus]
 
-  def insert(record: Nessus)(implicit connection: Connection): Boolean = blocking {
+  def insert(record: Nessus)(implicit connection: Connection): Option[Long] = blocking {
     val urls = record.seeAlso.map(_.toExternalForm).mkString(System.lineSeparator())
     val text = record.pluginText.take(TEXT_LENGTH)
     val description = record.description.take(TEXT_LENGTH)
@@ -68,7 +68,7 @@ object Nessus {
            ${record.synopsis}, $description, $solution, $urls, ${record.cve}, ${record.firstDiscovered},
            ${record.lastObserved}, ${record.exploitEase}, ${record.exploitFrameworks}, ${record.repository},
            ${record.macAddress}, ${record.vulnPublicationDate}, ${LocalDateTime.now()})"""
-      .executeUpdate() === 1
+      .executeInsert()
   }
 
   def take(n: PosInt)(implicit connection: Connection): List[Nessus] = {
@@ -79,5 +79,10 @@ object Nessus {
   def forIp(inetAddress: InetAddress)(implicit connection: Connection): List[Nessus] = blocking {
     SQL"""SELECT * FROM nessus WHERE IPAddress = $inetAddress"""
       .as(parser.*)
+  }
+
+  def forId(id: Long)(implicit connection: Connection): Option[Nessus] = blocking {
+    SQL"""SELECT * FROM nessus WHERE id = $id"""
+      .as(parser.singleOpt)
   }
 }

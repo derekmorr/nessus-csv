@@ -22,6 +22,6 @@ object URLGenerator {
     host  <- genInternetDomainName
     port  <- arbitrary[PortNumber]
     file  <- arbitrary[String]
-  } yield new URL(proto, host.toString, port.value, file)
+  } yield new URL(proto, host.toString, port.value, "/" + file)
 
 }

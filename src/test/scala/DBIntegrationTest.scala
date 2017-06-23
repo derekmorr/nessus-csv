@@ -16,9 +16,9 @@ class DBIntegrationTest extends DBTest {
   "Nessus" must {
     "round-trip records through the database" in withConnection { implicit connection =>
       forAll { record: Nessus =>
-        Nessus.insert(record) mustBe true
-        println(record.ipAddress)
-        Nessus.forIp(record.ipAddress) must contain (record)
+        val id = Nessus.insert(record)
+        id mustBe defined
+        Nessus.forId(id.get).value must === (record)
       }
     }
   }
