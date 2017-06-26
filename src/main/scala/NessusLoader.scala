@@ -38,7 +38,7 @@ object NessusLoader {
 
     val failures = allRecords.collect { case Failure(e) => e }
     println(s"failures: ${failures.length}")
-    failures.map { _.getLocalizedMessage }.distinct.foreach(println)
+    failures.map(_.getLocalizedMessage).distinct.foreach(println)
 
     records
   }

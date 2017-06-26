@@ -3,7 +3,8 @@ package edu.psu.vmhosting.purecsv
 import scala.language.higherKinds
 import scala.util.{Failure, Success, Try}
 
-import eu.timepit.refined.api.{RefType, Validate}
+import eu.timepit.refined.api.{RefType, Refined, Validate}
+import eu.timepit.refined.string.StartsWith
 import purecsv.safe.converter.StringConverter
 
 /**

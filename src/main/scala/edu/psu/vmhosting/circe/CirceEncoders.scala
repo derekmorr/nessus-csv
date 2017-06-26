@@ -8,7 +8,7 @@ import io.circe.{Encoder, Json}
 
 object CirceEncoders {
 
-  implicit val idnEncoder  = new Encoder[InternetDomainName] {
+  implicit val idnEncoder = new Encoder[InternetDomainName] {
     override def apply(idn: InternetDomainName): Json = Json.fromString(idn.toString)
   }
 
